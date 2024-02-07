@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart list</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        #inpa,#inpb,#inpc,button,table{
+            margin-top: 30px;
+        }
+        
+    </style>
+</head>
+
+<body >
+    <input id="inpa" type="text" placeholder="brand">
+    <input id="inpb" type="number" placeholder="quantity">
+    <input id="inpc" type="number" placeholder="price in(#)">
+    <button onclick="add_list()">add to list</button>
+    <div id="display">
+        <table style="border: 2px solid black;border-collapse: collapse; padding: 20px;">
+            <thead style="border: 2px solid black;">
+                <th style="border: 2px solid black; border-collapse: collapse; padding: 10px"  >brand</th>
+                <th style="border: 2px solid black; border-collapse: collapse; padding: 10px"  >quantity</th>
+                <th style="border: 2px solid black; border-collapse: collapse; padding: 10px"  >price per one</th>
+                <th style="border: 2px solid black; border-collapse: collapse; padding: 10px"  > total price</th>
+            </thead>
+            <tbody style="border: 2px solid black;border-collapse: collapse; padding: 10px " id="tbody">
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
+<script>
+    let tbody=document.getElementById('tbody')
+    let cartList = []
+    function add_list() {
+        let cart = {
+            brand: inpa.value,
+            quantity: inpb.value,
+            price: inpc.value
+        }
+        cartList.push(cart)
+        console.log(cart)
+        tbody.innerHTML = ''
+         disp()
+    }
+    function disp() {
+        cartList.forEach(function ({brand,quantity,price} , i) {
+         
+         tbody.innerHTML+= `<tr> <td style="border: 2px solid black; border-collapse: collapse; padding: 10px ">${brand} </td> <td style="border: 2px solid black;padding: 10px">${quantity }</td> <td style="border: 2px solid black;"padding: 10px>${price} </td><td style="border: 2px solid black;"padding: 10px>${quantity * price} </td><td><button onclick="remove(${i}) " >delete</button></td></tr> `
+        })
+    }
+    function remove (i) {
+
+        cartList.splice(i ,1)
+        console.log(cartList);
+        tbody.innerHTML = ''
+         disp()
+    }
+</script>
